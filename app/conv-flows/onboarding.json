@@ -1,0 +1,458 @@
+{
+  "flow_name": "onboarding",
+  "commands": [
+    "onboarding",
+    "registro",
+    "welcome"
+  ],
+  "guards": [
+    "require_new_user"
+  ],
+  "steps": [
+    {
+      "state": -2,
+      "variable": "AVISO_INICIAL",
+      "question": "⚠️ AVISO IMPORTANTE\n\nEste formulario crea tu expediente oficial.\n\n• Lee cada pregunta con atención.\n• Responde solo lo que se te pide.\n• Escribe /cancelar en cualquier momento para detener el proceso.\n\nConfirma cuando estés lista.",
+      "type": "keyboard",
+      "options": [
+        "Comenzar"
+      ]
+    },
+    {
+      "state": -1,
+      "variable": "INTRO_PERSONALES",
+      "question": "SECCIÓN 1 · DATOS PERSONALES\n\nUsaremos tu información exactamente como aparece en tus documentos oficiales.\n\n(Confirma para continuar)",
+      "type": "keyboard",
+      "options": [
+        "Continuar"
+      ]
+    },
+    {
+      "state": 0,
+      "variable": "NOMBRE_SALUDO",
+      "question": "¿Cómo te gusta que te llamemos?",
+      "type": "text"
+    },
+    {
+      "state": 1,
+      "variable": "NOMBRE_COMPLETO",
+      "question": "Escribe tus nombres (SIN apellidos), exactamente como aparecen en tu INE.",
+      "type": "text"
+    },
+    {
+      "state": 2,
+      "variable": "APELLIDO_PATERNO",
+      "question": "Apellido paterno:",
+      "type": "text"
+    },
+    {
+      "state": 3,
+      "variable": "APELLIDO_MATERNO",
+      "question": "Apellido materno:",
+      "type": "text"
+    },
+    {
+      "state": 4,
+      "variable": "CUMPLE_DIA",
+      "question": "Fecha de nacimiento · Día (solo número, ej. 13)",
+      "type": "text"
+    },
+    {
+      "state": 5,
+      "variable": "CUMPLE_MES",
+      "question": "Fecha de nacimiento · Mes",
+      "type": "keyboard",
+      "options": [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ]
+    },
+    {
+      "state": 6,
+      "variable": "CUMPLE_ANIO",
+      "question": "Fecha de nacimiento · Año (4 dígitos)",
+      "type": "text"
+    },
+    {
+      "state": 7,
+      "variable": "ESTADO_NACIMIENTO",
+      "question": "Estado de nacimiento\n\nSelecciona el estado donde naciste.\nSi no aparece, elige *Otro*.",
+      "type": "keyboard",
+      "options": [
+        "Coahuila",
+        "Nuevo León",
+        "Otro"
+      ],
+      "next_steps": [
+        {
+          "value": "Otro",
+          "go_to": 7.1
+        },
+        {
+          "value": "default",
+          "go_to": 7.5
+        }
+      ]
+    },
+    {
+      "state": 7.1,
+      "variable": "ESTADO_NACIMIENTO_OTRO",
+      "question": "Escribe el nombre del estado donde naciste.",
+      "type": "text",
+      "next_step": 7.5
+    },
+    {
+      "state": 7.5,
+      "variable": "INTRO_ADMIN",
+      "question": "SECCIÓN 2 · DATOS ADMINISTRATIVOS\n\nEstos datos se usan para contrato, nómina y comunicación oficial.\n\n(Confirma para continuar)",
+      "type": "keyboard",
+      "options": [
+        "Continuar"
+      ]
+    },
+    {
+      "state": 8,
+      "variable": "RFC",
+      "question": "RFC completo (13 caracteres, sin espacios):",
+      "type": "text"
+    },
+    {
+      "state": 9,
+      "variable": "CURP",
+      "question": "CURP completo (18 caracteres):",
+      "type": "text"
+    },
+    {
+      "state": 10,
+      "variable": "CORREO",
+      "question": "Correo electrónico personal:",
+      "type": "text"
+    },
+    {
+      "state": 11,
+      "variable": "CELULAR",
+      "question": "Número de celular (10 dígitos):",
+      "type": "text"
+    },
+    {
+      "state": 12,
+      "variable": "CALLE",
+      "question": "Domicilio · Calle:",
+      "type": "text"
+    },
+    {
+      "state": 13,
+      "variable": "NUM_EXTERIOR",
+      "question": "Domicilio · Número exterior:",
+      "type": "text"
+    },
+    {
+      "state": 14,
+      "variable": "NUM_INTERIOR",
+      "question": "Domicilio · Número interior (0 si no aplica):",
+      "type": "text"
+    },
+    {
+      "state": 15,
+      "variable": "COLONIA",
+      "question": "Domicilio · Colonia:",
+      "type": "text"
+    },
+    {
+      "state": 16,
+      "variable": "CODIGO_POSTAL",
+      "question": "Código Postal (5 dígitos):",
+      "type": "text"
+    },
+    {
+      "state": 17,
+      "variable": "CIUDAD_RESIDENCIA",
+      "question": "Ciudad de residencia:",
+      "type": "keyboard",
+      "options": [
+        "Saltillo",
+        "Ramos Arizpe",
+        "Arteaga",
+        "Otro"
+      ],
+      "next_steps": [
+        {
+          "value": "Otro",
+          "go_to": 17.1
+        },
+        {
+          "value": "default",
+          "go_to": 18
+        }
+      ]
+    },
+    {
+      "state": 17.1,
+      "variable": "CIUDAD_RESIDENCIA_OTRO",
+      "question": "Escribe tu ciudad de residencia:",
+      "type": "text",
+      "next_step": 18
+    },
+    {
+      "state": 18,
+      "variable": "ROL",
+      "question": "Rol dentro del equipo:",
+      "type": "keyboard",
+      "options": [
+        "Belleza",
+        "Staff (Recepción)",
+        "Marketing"
+      ]
+    },
+    {
+      "state": 19,
+      "variable": "SUCURSAL",
+      "question": "Sucursal principal:",
+      "type": "keyboard",
+      "options": [
+        "Plaza Cima (Sur)",
+        "Plaza O (Carranza)"
+      ]
+    },
+    {
+      "state": 20,
+      "variable": "INICIO_DIA",
+      "question": "Fecha de ingreso · Día:",
+      "type": "text"
+    },
+    {
+      "state": 21,
+      "variable": "INICIO_MES",
+      "question": "Fecha de ingreso · Mes:",
+      "type": "keyboard",
+      "options": [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ]
+    },
+    {
+      "state": 22,
+      "variable": "INICIO_ANIO",
+      "question": "Fecha de ingreso · Año:",
+      "type": "keyboard",
+      "options": [
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    {
+      "state": 22.5,
+      "variable": "INTRO_EMERGENCIA",
+      "question": "SECCIÓN 3 · CONTACTO DE EMERGENCIA\n\nEsta persona solo será contactada en una emergencia real.\n\n(Confirma para continuar)",
+      "type": "keyboard",
+      "options": [
+        "Continuar"
+      ]
+    },
+    {
+      "state": 23,
+      "variable": "EMERGENCIA_NOMBRE",
+      "question": "Contacto de emergencia · Nombre completo:",
+      "type": "text"
+    },
+    {
+      "state": 24,
+      "variable": "EMERGENCIA_TEL",
+      "question": "Contacto de emergencia · Teléfono:",
+      "type": "text"
+    },
+    {
+      "state": 25,
+      "variable": "EMERGENCIA_RELACION",
+      "question": "Relación con el contacto de emergencia:",
+      "type": "keyboard",
+      "options": [
+        "Padre/Madre",
+        "Pareja",
+        "Hermano/a",
+        "Hijo/a",
+        "Amigo/a",
+        "Otro"
+      ],
+      "next_steps": [
+        {
+          "value": "Otro",
+          "go_to": 25.1
+        },
+        {
+          "value": "default",
+          "go_to": 26
+        }
+      ]
+    },
+    {
+      "state": 25.1,
+      "variable": "EMERGENCIA_RELACION_OTRA",
+      "question": "Describe la relación con tu contacto de emergencia:",
+      "type": "text",
+      "next_step": 26
+    },
+    {
+      "state": 26,
+      "variable": "INTRO_REFERENCIAS",
+      "question": "SECCIÓN 4 · REFERENCIAS PERSONALES\n\nNecesitamos 3 referencias reales que te conozcan.\n\n(Confirma para continuar)",
+      "type": "keyboard",
+      "options": [
+        "Continuar"
+      ]
+    },
+    {
+      "state": 27,
+      "variable": "REF1_NOMBRE",
+      "question": "Referencia 1 · Nombre completo:",
+      "type": "text"
+    },
+    {
+      "state": 28,
+      "variable": "REF1_TELEFONO",
+      "question": "Referencia 1 · Teléfono:",
+      "type": "text"
+    },
+    {
+      "state": 29,
+      "variable": "REF1_TIPO",
+      "question": "Referencia 1 · Relación:",
+      "type": "keyboard",
+      "options": [
+        "Familiar",
+        "Amistad",
+        "Trabajo",
+        "Académica",
+        "Otra"
+      ],
+      "next_steps": [
+        {
+          "value": "Otra",
+          "go_to": 29.1
+        },
+        {
+          "value": "default",
+          "go_to": 30
+        }
+      ]
+    },
+    {
+      "state": 29.1,
+      "variable": "REF1_TIPO_OTRA",
+      "question": "Especifica la relación con la Referencia 1:",
+      "type": "text",
+      "next_step": 30
+    },
+    {
+      "state": 30,
+      "variable": "REF2_NOMBRE",
+      "question": "Referencia 2 · Nombre completo:",
+      "type": "text"
+    },
+    {
+      "state": 31,
+      "variable": "REF2_TELEFONO",
+      "question": "Referencia 2 · Teléfono:",
+      "type": "text"
+    },
+    {
+      "state": 32,
+      "variable": "REF2_TIPO",
+      "question": "Referencia 2 · Relación:",
+      "type": "keyboard",
+      "options": [
+        "Familiar",
+        "Amistad",
+        "Trabajo",
+        "Académica",
+        "Otra"
+      ],
+      "next_steps": [
+        {
+          "value": "Otra",
+          "go_to": 32.1
+        },
+        {
+          "value": "default",
+          "go_to": 33
+        }
+      ]
+    },
+    {
+      "state": 32.1,
+      "variable": "REF2_TIPO_OTRA",
+      "question": "Especifica la relación con la Referencia 2:",
+      "type": "text",
+      "next_step": 33
+    },
+    {
+      "state": 33,
+      "variable": "REF3_NOMBRE",
+      "question": "Referencia 3 · Nombre completo:",
+      "type": "text"
+    },
+    {
+      "state": 34,
+      "variable": "REF3_TELEFONO",
+      "question": "Referencia 3 · Teléfono:",
+      "type": "text"
+    },
+    {
+      "state": 35,
+      "variable": "REF3_TIPO",
+      "question": "Referencia 3 · Relación:",
+      "type": "keyboard",
+      "options": [
+        "Familiar",
+        "Amistad",
+        "Trabajo",
+        "Académica",
+        "Otra"
+      ],
+      "next_steps": [
+        {
+          "value": "Otra",
+          "go_to": 35.1
+        },
+        {
+          "value": "default",
+          "go_to": 99
+        }
+      ]
+    },
+    {
+      "state": 35.1,
+      "variable": "REF3_TIPO_OTRA",
+      "question": "Especifica la relación con la Referencia 3:",
+      "type": "text",
+      "next_step": 99
+    },
+    {
+      "state": 99,
+      "variable": "FLOW_END",
+      "question": "✅ ¡Gracias!\n\nTu registro quedó completo. RH validará la información y te confirmará los siguientes pasos.\n\nSi necesitas corregir algo, escribe /cancelar y empieza de nuevo.",
+      "type": "info"
+    }
+  ]
+}

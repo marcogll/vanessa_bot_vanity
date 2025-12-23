@@ -1,0 +1,16 @@
+.env
+.env.bak
+__pycache__/
+.git/
+.gitignore
+.venv/
+venv/
+*.pyc
+*.pyo
+*.pyd
+*.log
+dist/
+build/
+node_modules/
+README.md
+Vanessa.md

@@ -1,0 +1,95 @@
+{
+  "flow_name": "leave_request",
+  "steps": [
+    {
+      "state": "INTRO_ALERT",
+      "variable": "AVISO_INICIAL",
+      "question": "⏱️ SOLICITUD DE PERMISO POR HORAS\n\nConfirma que le avisaste a tu manager y que necesitas registrar un permiso formal.",
+      "type": "keyboard",
+      "options": ["Continuar"]
+    },
+    {
+      "state": "INTRO_SCOPE",
+      "variable": "INTRO_SCOPE",
+      "question": "SECCIÓN ÚNICA · FECHAS, HORARIO Y MOTIVO\n\nResponde exactamente lo que se te pide para evitar rechazos.",
+      "type": "info"
+    },
+    {
+      "state": "PERMISO_CUANDO",
+      "question": "¿Para cuándo lo necesitas?",
+      "type": "keyboard",
+      "options": ["Hoy", "Mañana", "Pasado mañana", "Fecha específica"],
+      "next_step": [
+        {
+          "condition": "response in ['Hoy', 'Mañana', 'Pasado mañana']",
+          "state": "HORARIO"
+        },
+        {
+          "condition": "response == 'Fecha específica'",
+          "state": "PERMISO_ANIO"
+        }
+      ]
+    },
+    {
+      "state": "PERMISO_ANIO",
+      "question": "¿Para qué año es el permiso? (elige el actual o el siguiente)",
+      "type": "keyboard",
+      "options": ["current_year", "next_year"],
+      "next_step": "INICIO_DIA"
+    },
+    {
+      "state": "INICIO_DIA",
+      "question": "¿En qué *día* inicia el permiso? (número, ej: 12)",
+      "type": "text",
+      "next_step": "INICIO_MES"
+    },
+    {
+      "state": "INICIO_MES",
+      "question": "¿De qué *mes* inicia?",
+      "type": "keyboard",
+      "options": [
+        "Enero", "Febrero", "Marzo",
+        "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre",
+        "Octubre", "Noviembre", "Diciembre"
+      ],
+      "next_step": "FIN_DIA"
+    },
+    {
+      "state": "FIN_DIA",
+      "question": "¿Qué *día* termina?",
+      "type": "text",
+      "next_step": "FIN_MES"
+    },
+    {
+      "state": "FIN_MES",
+      "question": "¿De qué *mes* termina?",
+      "type": "keyboard",
+      "options": [
+        "Enero", "Febrero", "Marzo",
+        "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre",
+        "Octubre", "Noviembre", "Diciembre"
+      ],
+      "next_step": "HORARIO"
+    },
+    {
+      "state": "HORARIO",
+      "question": "¿Cuál es el horario? Ej: `09:00-11:00` o `Todo el día`.",
+      "type": "text",
+      "next_step": "MOTIVO"
+    },
+    {
+      "state": "MOTIVO",
+      "question": "Entendido. ¿Cuál es el motivo o comentario adicional?",
+      "type": "text",
+      "next_step": "FLOW_END"
+    },
+    {
+      "state": "FLOW_END",
+      "variable": "FLOW_END",
+      "question": "✅ Gracias. Tu permiso quedó registrado y RH revisará la información. Si necesitas otro, vuelve a iniciar con /permiso.",
+      "type": "info"
+    }
+  ]
+}

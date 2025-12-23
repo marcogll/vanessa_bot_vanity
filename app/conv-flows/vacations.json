@@ -1,0 +1,80 @@
+{
+  "flow_name": "vacations",
+  "steps": [
+    {
+      "state": -2,
+      "variable": "AVISO_GENERAL",
+      "question": "🌴 SOLICITUD DE VACACIONES\n\nAntes de registrar tus fechas confirma que:\n\n• Ya hablaste con tu manager\n• Las fechas no se traslapan con guardias críticas\n• Sabes que el bot notificará al equipo de RH\n\nConfirma para continuar.",
+      "type": "keyboard",
+      "options": ["Continuar"]
+    },
+    {
+      "state": -1,
+      "variable": "INTRO_FECHAS",
+      "question": "SECCIÓN ÚNICA · FECHAS Y MOTIVO\n\nComparte las fechas exactas del descanso y cualquier comentario relevante.",
+      "type": "info"
+    },
+    {
+      "state": 0,
+      "variable": "INICIO_DIA",
+      "question": "¿Qué *día* inicia tu descanso? (número, ej: 10)",
+      "type": "text"
+    },
+    {
+      "state": 1,
+      "variable": "INICIO_MES",
+      "question": "¿De qué *mes* inicia?",
+      "type": "keyboard",
+      "options": [
+        "Enero", "Febrero", "Marzo",
+        "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre",
+        "Octubre", "Noviembre", "Diciembre"
+      ]
+    },
+    {
+      "state": 2,
+      "variable": "INICIO_ANIO",
+      "question": "¿De qué *año* inicia? (elige el actual o el siguiente)",
+      "type": "keyboard",
+      "options": ["current_year", "next_year"]
+    },
+    {
+      "state": 3,
+      "variable": "FIN_DIA",
+      "question": "¿Qué *día* termina tu descanso?",
+      "type": "text"
+    },
+    {
+      "state": 4,
+      "variable": "FIN_MES",
+      "question": "¿De qué *mes* termina?",
+      "type": "keyboard",
+      "options": [
+        "Enero", "Febrero", "Marzo",
+        "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre",
+        "Octubre", "Noviembre", "Diciembre"
+      ]
+    },
+    {
+      "state": 5,
+      "variable": "FIN_ANIO",
+      "question": "¿De qué *año* termina tu descanso? (elige el actual o el siguiente)",
+      "type": "keyboard",
+      "options": ["current_year", "next_year"]
+    },
+    {
+      "state": 6,
+      "variable": "MOTIVO",
+      "question": "Entendido. ¿Cuál es el motivo o comentario adicional?",
+      "type": "text"
+    },
+    {
+      "state": 99,
+      "variable": "FLOW_END",
+      "question": "✅ Solicitud registrada.\n\nRH validará la información y te confirmará si las fechas quedan asignadas. Si necesitas cambiar algo, vuelve a iniciar con /vacaciones.",
+      "type": "info"
+    }
+  ]
+}
