@@ -29,3 +29,14 @@ def register_user(user_data: dict) -> bool:
     except Exception as e:
         logging.error(f"[MockDB] Register error: {e}")
         return False
+
+
+def deregister_user(chat_id: int) -> bool:
+    """Mock deregister: removes user from in-memory set."""
+    try:
+        _REGISTERED_USERS.discard(int(chat_id))
+        logging.info(f"[MockDB] User {chat_id} deregistered from memory.")
+        return True
+    except Exception as e:
+        logging.error(f"[MockDB] Deregister error: {e}")
+        return False
