@@ -11,21 +11,10 @@ _REGISTERED_USERS = set()
 
 def chat_id_exists(chat_id: int) -> bool:
     """Mock check: returns True if user is in in-memory set."""
-    return int(chat_id) in _REGISTERED_USERS
+    return False
 
 def register_user(user_data: dict) -> bool:
     """Mock register: adds user to in-memory set."""
-    try:
-        meta = user_data.get("meta", {})
-        metadata = user_data.get("metadata", {})
-        tid = meta.get("telegram_id") or metadata.get("telegram_id") or metadata.get("chat_id")
-
-        if tid:
-            _REGISTERED_USERS.add(int(tid))
-            logging.info(f"[MockDB] User {tid} registered in memory.")
-            return True
-        logging.warning("[MockDB] Could not find telegram_id in user_data.")
-        return False
-    except Exception as e:
-        logging.error(f"[MockDB] Register error: {e}")
-        return False
+    # This function is now a no-op to ensure statelessness.
+    # It always returns True to not break the conversation flow.
+    return True
