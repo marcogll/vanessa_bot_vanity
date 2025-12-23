@@ -6,11 +6,14 @@ def main_actions_keyboard(is_registered: bool = False) -> ReplyKeyboardMarkup:
     keyboard = []
     if not is_registered:
         keyboard.append(["/registro"])
-    
-    keyboard.extend([
-        ["/vacaciones", "/permiso"],
-        ["/links", "/start"],
-    ])
+
+    keyboard.extend(
+        [
+            ["/horario"],
+            ["/vacaciones", "/permiso"],
+            ["/links", "/cancelar"],
+        ]
+    )
 
     return ReplyKeyboardMarkup(
         keyboard,
