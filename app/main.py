@@ -18,7 +18,7 @@ from telegram.ext import Application, Defaults, CommandHandler, ContextTypes
 # --- IMPORTAR HABILIDADES ---
 from modules.flow_builder import load_flows
 from modules.logger import log_request
-from modules.database import chat_id_exists, deregister_user
+from modules.database import chat_id_exists  # Importar chat_id_exists
 from modules.ui import main_actions_keyboard
 
 from modules.rh_requests import vacaciones_handler, permiso_handler
@@ -105,17 +105,6 @@ async def menu_principal(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-async def reset_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Permite a un usuario eliminar su registro para reiniciar el flujo."""
-    user = update.effective_user
-    log_request(user.id, user.username, "reset", update.message.text)
-
-    deregister_user(user.id)
-    await update.message.reply_text("🔄 Tu registro ha sido eliminado. Ahora puedes volver a registrarte.")
-    # Llamar a menu_principal para mostrar el menú actualizado
-    await menu_principal(update, context)
-
-
 async def post_init(application: Application):
     # Mantén los comandos rápidos disponibles en el menú de Telegram
     await application.bot.set_my_commands(
@@ -157,7 +146,6 @@ def main():
     app.add_handler(CommandHandler("start", menu_principal))
     app.add_handler(CommandHandler("help", menu_principal))
     app.add_handler(CommandHandler("links", links_menu))
-    app.add_handler(CommandHandler("reset", reset_command))
 
     # Handlers de módulos
     app.add_handler(vacaciones_handler)
