@@ -18,10 +18,7 @@ from telegram.ext import Application, Defaults, CommandHandler, ContextTypes
 # --- IMPORTAR HABILIDADES ---
 from modules.flow_builder import load_flows
 from modules.logger import log_request
-from modules.database import (
-    chat_id_exists,
-    load_registered_users,
-)  # Importar chat_id_exists y load_registered_users
+from modules.database import chat_id_exists  # Importar chat_id_exists
 from modules.ui import main_actions_keyboard
 
 from modules.rh_requests import vacaciones_handler, permiso_handler
@@ -109,11 +106,6 @@ async def menu_principal(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def post_init(application: Application):
-    """Tareas a ejecutar después de que el bot se haya inicializado."""
-    # Cargar usuarios registrados desde el archivo de persistencia.
-    # Es crucial que esto se ejecute antes de que el bot empiece a recibir updates.
-    load_registered_users()
-
     # Mantén los comandos rápidos disponibles en el menú de Telegram
     await application.bot.set_my_commands(
         [
